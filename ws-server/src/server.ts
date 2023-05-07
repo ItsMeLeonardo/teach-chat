@@ -1,19 +1,21 @@
 import * as Koa from "koa";
 import { createServer } from "./config/createServer";
+import { Server } from "socket.io";
+
+const PORT = process.env.PORT || 3003;
 
 const app = new Koa();
 
 const server = createServer(app.callback());
 
-app.use(async (ctx) => {
-  ctx.body = "Hello ---";
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
 });
 
-/* app.listen(3000, () => {
-  console.log("server is running at http://localhost:4000");
-});
- */
+io.on("connection", (socket) => {});
 
-server.listen(3000, () => {
-  console.log("server is running at http://localhost:3000");
+server.listen(PORT, () => {
+  console.log(`server is running at http://localhost:${PORT}`);
 });

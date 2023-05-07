@@ -1,6 +1,21 @@
 import ChatLayout from '@/layouts/Chat'
+import { useEffect } from 'react'
+
+import { socket } from '@/services/socket'
 
 export default function ChatPage() {
+	useEffect(() => {
+		/* 		socket.connect()
+
+		socket.on('connect', () => {
+			console.log('connected')
+		})
+
+		return () => {
+			socket.disconnect()
+		} */
+	}, [])
+
 	return (
 		<ChatLayout>
 			<div className="h-full w-full overflow-hidden bg-purple-radial-gradient p-4">
