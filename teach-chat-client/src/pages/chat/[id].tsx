@@ -5,6 +5,8 @@ import ChatLayout from '@/layouts/Chat'
 import ChatForm from '@/components/ChatForm'
 import { ChatProvider, Message } from '@/components/ChatForm/Store'
 import { useEffect } from 'react'
+import { socket } from '@/services/socket'
+import { SOCKET_EVENTS } from '@/services/socket/SocketEvents'
 
 type PreRenderProps = {
 	initialChatState: {
@@ -18,6 +20,14 @@ export default function ChatConversation({ initialChatState }: PreRenderProps) {
 	const router = useRouter()
 
 	const id = router.query.id as string
+
+	useEffect(() => {
+		if (!id) return
+
+		socket.emit(SOCKET_EVENTS.START_CONVERSATION, {
+			userId: id,
+		})
+	}, [id])
 
 	return (
 		<ChatLayout>
@@ -96,7 +106,8 @@ const dataBase = [
 ChatConversation.getInitialProps = async (ctx: GetServerSidePropsContext) => {
 	const { id } = ctx.query
 
-	const initialChatState = dataBase.find((chat) => chat.id === id)
+	const initialChatState = dataBase[0]
+	// const initialChatState = dataBase.find((chat) => chat.id === id)
 	return {
 		initialChatState,
 		key: id,

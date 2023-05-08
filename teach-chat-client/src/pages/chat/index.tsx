@@ -1,19 +1,12 @@
 import ChatLayout from '@/layouts/Chat'
-import { useEffect } from 'react'
-
 import { socket } from '@/services/socket'
+import { useEffect } from 'react'
 
 export default function ChatPage() {
 	useEffect(() => {
-		/* 		socket.connect()
-
 		socket.on('connect', () => {
 			console.log('connected')
 		})
-
-		return () => {
-			socket.disconnect()
-		} */
 	}, [])
 
 	return (
@@ -33,7 +26,7 @@ export default function ChatPage() {
 							<span className="text-bold px-2">Join</span>
 							<input
 								type="text"
-								className="outline-none bg-neutral-100 w-full p-2 rounded-md"
+								className="outline-none bg-neutral-100 w-full p-2 rounded-md border-none"
 								placeholder="room code"
 							/>
 						</label>
@@ -43,7 +36,7 @@ export default function ChatPage() {
 						<form className="flex items-center gap-2 p-2 bg-white rounded-lg">
 							<input
 								type="text"
-								className="outline-none bg-neutral-100 w-full p-2 rounded-md"
+								className="outline-none bg-neutral-100 w-full p-2 rounded-md border-none"
 								placeholder="create a room"
 							/>
 							<button className="text-bold px-4 text-sm bg-violet-500 text-white h-full rounded-lg">Create</button>
